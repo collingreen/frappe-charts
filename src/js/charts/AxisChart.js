@@ -40,6 +40,7 @@ export default class AxisChart extends BaseChart {
 		this.config.xIsSeries = options.axisOptions.xIsSeries || 0;
 		this.config.shortenYAxisNumbers = options.axisOptions.shortenYAxisNumbers || 0;
 
+		this.config.formatYAxis = options.axisOptions.formatYAxis;
 		this.config.formatTooltipX = options.tooltipOptions.formatTooltipX;
 		this.config.formatTooltipY = options.tooltipOptions.formatTooltipY;
 
@@ -193,7 +194,8 @@ export default class AxisChart extends BaseChart {
 				{
 					mode: this.config.yAxisMode,
 					width: this.width,
-					shortenNumbers: this.config.shortenYAxisNumbers
+					shortenNumbers: this.config.shortenYAxisNumbers,
+					formatter: this.config.formatYAxis,
 					// pos: 'right'
 				},
 				function() {

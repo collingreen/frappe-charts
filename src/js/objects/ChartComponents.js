@@ -118,8 +118,16 @@ let componentConfigs = {
 		layerClass: 'y axis',
 		makeElements(data) {
 			return data.positions.map((position, i) =>
-				yLine(position, data.labels[i], this.constants.width,
-					{mode: this.constants.mode, pos: this.constants.pos, shortenNumbers: this.constants.shortenNumbers})
+				yLine(
+					position,
+					data.labels[i],
+					this.constants.width,
+					{
+						mode: this.constants.mode,
+						pos: this.constants.pos,
+						shortenNumbers: this.constants.shortenNumbers,
+						formatter: this.constants.formatter,
+					})
 			);
 		},
 

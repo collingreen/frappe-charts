@@ -322,7 +322,11 @@ function makeVertLine(x, label, y1, y2, options={}) {
 function makeHoriLine(y, label, x1, x2, options={}) {
 	if(!options.stroke) options.stroke = BASE_LINE_COLOR;
 	if(!options.lineType) options.lineType = '';
-	if (options.shortenNumbers) label = shortenLargeNumber(label);
+	if (options.shortenNumbers) {
+		label = shortenLargeNumber(label);
+	} else if (options.formatter) {
+		label = options.formatter(y, label);
+	}
 
 	let className = 'line-horizontal ' + options.className +
 		(options.lineType === "dashed" ? "dashed": "");
@@ -388,7 +392,8 @@ export function yLine(y, label, width, options={}) {
 		stroke: options.stroke,
 		className: options.className,
 		lineType: options.lineType,
-		shortenNumbers: options.shortenNumbers
+		shortenNumbers: options.shortenNumbers,
+		formatter: options.formatter,
 	});
 }
 
@@ -446,7 +451,8 @@ export function yMarker(y, label, width, options={}) {
 	let line = makeHoriLine(y, '', 0, width, {
 		stroke: options.stroke || BASE_LINE_COLOR,
 		className: options.className || '',
-		lineType: options.lineType
+		lineType: options.lineType,
+		formatter: options.formatter,
 	});
 
 	line.appendChild(labelSvg);
