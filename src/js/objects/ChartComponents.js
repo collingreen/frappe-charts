@@ -126,7 +126,7 @@ let componentConfigs = {
 						mode: this.constants.mode,
 						pos: this.constants.pos,
 						shortenNumbers: this.constants.shortenNumbers,
-						formatter: this.constants.formatter,
+						formatYAxis: this.constants.formatYAxis,
 					})
 			);
 		},
@@ -389,12 +389,16 @@ let componentConfigs = {
 			this.units = [];
 			if(!c.hideDots) {
 				this.units = data.yPositions.map((y, j) => {
+					let dotLabel = (c.valuesOverPoints ? data.values[j] : '');
+					if (c.formatValueOverPoint) {
+						dotLabel = c.formatValueOverPoint(data.values[j], dotLabel);
+					}
 					return datasetDot(
 						data.xPositions[j],
 						y,
 						data.radius,
 						c.color,
-						(c.valuesOverPoints ? data.values[j] : ''),
+						dotLabel,
 						j
 					);
 				});

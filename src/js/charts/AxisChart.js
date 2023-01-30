@@ -45,6 +45,7 @@ export default class AxisChart extends BaseChart {
 		this.config.formatTooltipY = options.tooltipOptions.formatTooltipY;
 
 		this.config.valuesOverPoints = options.valuesOverPoints;
+		this.config.formatValueOverPoint = options.formatValueOverPoint;
 	}
 
 	prepareData(data=this.data) {
@@ -195,7 +196,8 @@ export default class AxisChart extends BaseChart {
 					mode: this.config.yAxisMode,
 					width: this.width,
 					shortenNumbers: this.config.shortenYAxisNumbers,
-					formatter: this.config.formatYAxis,
+					formatYAxis: this.config.formatYAxis,
+					formatYMarker: this.config.formatYMarker,
 					// pos: 'right'
 				},
 				function() {
@@ -245,6 +247,7 @@ export default class AxisChart extends BaseChart {
 
 					// same for all datasets
 					valuesOverPoints: this.config.valuesOverPoints,
+					formatValueOverPoint: this.config.formatValueOverPoint,
 					minHeight: this.height * MIN_BAR_PERCENT_HEIGHT,
 				},
 				function() {
@@ -267,6 +270,10 @@ export default class AxisChart extends BaseChart {
 							labels = d.cumulativeYs;
 						} else {
 							labels = d.values;
+						}
+
+						if (this.config.formatValueOverPoint) {
+							labels = labels.map(value => this.config.formatValueOvePoint(value, `${value}`));
 						}
 					}
 
@@ -306,6 +313,7 @@ export default class AxisChart extends BaseChart {
 
 					// same for all datasets
 					valuesOverPoints: this.config.valuesOverPoints,
+					formatValueOverPoint: this.config.formatValueOverPoint,
 				},
 				function() {
 					let s = this.state;

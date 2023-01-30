@@ -325,7 +325,7 @@ function makeHoriLine(y, label, x1, x2, options={}) {
 	if (options.shortenNumbers) {
 		label = shortenLargeNumber(label);
 	} else if (options.formatter) {
-		label = options.formatter(y, label);
+		label = options.formatter(label, label);
 	}
 
 	let className = 'line-horizontal ' + options.className +
@@ -393,7 +393,7 @@ export function yLine(y, label, width, options={}) {
 		className: options.className,
 		lineType: options.lineType,
 		shortenNumbers: options.shortenNumbers,
-		formatter: options.formatter,
+		formatter: options.formatYAxis,
 	});
 }
 
@@ -452,7 +452,6 @@ export function yMarker(y, label, width, options={}) {
 		stroke: options.stroke || BASE_LINE_COLOR,
 		className: options.className || '',
 		lineType: options.lineType,
-		formatter: options.formatter,
 	});
 
 	line.appendChild(labelSvg);
